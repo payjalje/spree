@@ -26,6 +26,7 @@ paths:
   /api/v2/storefront/account:
     get:
       description: Returns current user information
+      summary: Get an Account
       tags:
         - Account
       operationId: Account Information
@@ -112,6 +113,7 @@ paths:
         Creates a new account
 
         This endpoint requires [Spree Auth Devise](https://github.com/spree/spree_auth_devise) gem installed
+      summary: Create an Account
       tags:
         - Account
       operationId: 'Account Creation'
@@ -152,6 +154,7 @@ paths:
         Updates user account
 
         This endpoint requires [Spree Auth Devise](https://github.com/spree/spree_auth_devise) gem installed
+      summary: Update an Account
       tags:
         - Account
       operationId: 'Account Updates'
@@ -189,10 +192,11 @@ paths:
                 $ref: '#/components/schemas/Error'
       security:
         - bearerAuth: []
-  '/account/addresses':
+  '/api/v2/storefront/account/addresses':
     get:
       description: >-
         Returns a list of Addresses for the signed in User
+      summary: List of Addresses
       tags:
         - Account
       operationId: 'Addresses list'
@@ -210,6 +214,7 @@ paths:
     post:
       description: >-
         Create a new Address for the signed in User
+      summary: Create an Address
       tags:
         - Account
       operationId: 'Create Address'
@@ -233,10 +238,11 @@ paths:
           $ref: '#/components/responses/403Forbidden'
       security:
         - bearerAuth: []
-  '/account/addresses/{id}':
+  '/api/v2/storefront/account/addresses/{id}':
     patch:
       description: >-
         Update selected Address for the signed in User
+      summary: List of Addresses
       tags:
         - Account
       operationId: 'Update Address'
@@ -268,9 +274,10 @@ paths:
           $ref: '#/components/responses/403Forbidden'
       security:
         - bearerAuth: []
-  '/account/credit_cards':
+  '/api/v2/storefront/account/credit_cards':
     get:
       description: Returns a list of Credit Cards for the signed in User
+      summary: List of Credit Cards
       tags:
         - Account
       operationId: Credit Cards list
@@ -294,10 +301,10 @@ paths:
           description: Filter based on payment method ID
         - $ref: '#/components/parameters/CreditCardIncludeParam'
         - $ref: '#/components/parameters/SparseFieldsParam'
-      summary: List of Credit Cards
   /api/v2/storefront/account/credit_cards/default:
     get:
       description: "Return the User's default Credit Card"
+      summary: Get Default Credit Card
       tags:
         - Account
       operationId: Default Credit Card
@@ -315,10 +322,10 @@ paths:
         - $ref: '#/components/parameters/SparseFieldsParam'
       security:
         - bearerAuth: []
-      summary: Get Default Credit Card
   /api/v2/storefront/account/orders:
     get:
       description: Returns Orders placed by the User. Only completed ones.
+      summary: List of Orders
       tags:
         - Account
       operationId: Completed Orders
@@ -338,10 +345,10 @@ paths:
         - $ref: '#/components/parameters/PerPageParam'
       security:
         - bearerAuth: []
-      summary: List of Orders
   '/api/v2/storefront/api/v2/storefront/account/orders/{number}':
     get:
       description: "Return the User's completed Order"
+      summary: Get an Order
       tags:
         - Account
       operationId: Completed User Order
@@ -360,10 +367,10 @@ paths:
         - $ref: '#/components/parameters/SparseFieldsParam'
       security:
         - bearerAuth: []
-      summary: Get an Order
   '/api/v2/storefront/order_status/{number}':
     get:
       description: "Returns placed Order information. This endpoint is useful for fetching Order information for non-signed in Users. This way customers without an account can check their Order status (shipment/paymnet/processing/etc).\n\nTo fetch an Order you will need to use Order Token for authorization. "
+      summary: Get an Order Status
       tags:
         - Order Status
       operationId: Order Status
@@ -382,7 +389,6 @@ paths:
         - $ref: '#/components/parameters/SparseFieldsParam'
       security:
         - orderToken: []
-      summary: Get an Order Status
   /api/v2/storefront/cart:
     post:
       description: "Creates new Cart and returns it attributes.\n\nThe **token** attribute, can be used for authorization of all operations on this particular Cart and Checkout.\n\nIt is required to create a Cart befopre adding items to the Cart. After completing the Checkout you will need to create a new Cart. "
@@ -3753,7 +3759,7 @@ components:
         Order token to authorize Cart and Checkout requests.
         Useful for guest checouts when you don't have the user token (bearerAuth)
 
-        You can obtain it from the `/api/v2/storefront/cart` endpoint - it's part of the response (value of the `token` attribute).
+        You can obtain it from the [/cart](index.yaml/paths/~1cart/post) endpoint - it's part of the response (value of the `token` attribute).
       name: X-Spree-Order-Token
   schemas:
     Error:
