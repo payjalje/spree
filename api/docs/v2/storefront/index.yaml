@@ -920,15 +920,11 @@ paths:
       summary: List of Payment Methods
   /api/v2/storefront/checkout/shipping_rates:
     get:
-<<<<<<< HEAD
       description: >-
         Returns a list of available Shipping Rates for Checkout.
         Shipping Rates are grouped against Shipments.
         Each checkout can have multiple Shipments eg. some products are available
         in stock and will be send out instantly and some needs to be backordered.
-=======
-      description: Returns a list of available Shipping Rates for Checkout. Shipping Rates are grouped against Shipments. Each checkout cna have multiple Shipments eg. some products are available in stock and will be send out instantly and some needs to be backordered.
->>>>>>> WIP
       tags:
         - Checkout
       operationId: Shipping Rates
@@ -4136,14 +4132,12 @@ components:
           example: '1232'
           description: Last 4 digits of CC number
         month:
-          type: integer
+          type: string
           description: Expiration date month
-          example: 10
-          minimum: '01'
-          maximum: 12
+          example: '10'
         year:
-          type: integer
-          example: 2019
+          type: string
+          example: '2019'
           description: Expiration date year
         name:
           type: string
@@ -4976,6 +4970,7 @@ components:
           example: '1'
         type:
           type: string
+          example: payment_method
           default: payment_method
         attributes:
           type: object
